@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.bbva.elara</groupId>
+		<artifactId>elara-project</artifactId>
+		<version>7.8.9</version>
+	</parent>
+	<groupId>com.bbva.pisd</groupId>
+	<artifactId>PISDR352-parent</artifactId>
+	<version>0.1.0-SNAPSHOT</version>
+	<name>PISDR352-parent</name>
+	<description>Deployment unit lib_insurance_emission of uuaa pisd</description>
+	<packaging>pom</packaging>
+	<properties>
+		<outputDirectoryLibraries>../target</outputDirectoryLibraries>
+		<apx.core.online.version>7.8.9</apx.core.online.version>
+		<apx.core.batch.version>7.8.2</apx.core.batch.version>
+		<jacoco.no.coverage>0.00</jacoco.no.coverage>
+		<jacoco.min.coverage>0.80</jacoco.min.coverage>
+		<jacoco.type.coverage>COMPLEXITY</jacoco.type.coverage>
+	</properties>
+	<modules>
+		<module>PISDR352</module>
+		<module>PISDR352IMPL</module>
+	</modules>
+</project>
