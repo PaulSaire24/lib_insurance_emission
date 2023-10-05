@@ -1,5 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.bbva.pisd</groupId>
@@ -15,7 +15,13 @@
 	<properties>
 		<osgi.version.manifest>0.0</osgi.version.manifest>
 	</properties>
-	<dependencies/>
+	<dependencies>
+		<dependency>
+			<groupId>com.bbva.rbvd.dto.insrncsale</groupId>
+			<artifactId>RBVDC201</artifactId>
+			<version>0.17.0</version>
+		</dependency>
+	</dependencies>
 	<build>
 		<finalName>${project.artifactId}</finalName>
 		<plugins>
@@ -40,7 +46,7 @@
 						<phase>install</phase>
 						<configuration>
 							<tasks>
-								<copy todir="${outputDirectoryLibraries}" file="./target/${project.artifactId}.jar" />
+								<copy todir="${outputDirectoryLibraries}" file="./target/${project.artifactId}.jar"/>
 							</tasks>
 						</configuration>
 						<goals>
