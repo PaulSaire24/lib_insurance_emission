@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.bbva.elara</groupId>
 		<artifactId>elara-project</artifactId>
-		<version>7.8.9</version>
+		<version>7.10.0</version>
 	</parent>
 	<groupId>com.bbva.pisd</groupId>
 	<artifactId>PISDR352-parent</artifactId>
@@ -14,8 +14,8 @@
 	<packaging>pom</packaging>
 	<properties>
 		<outputDirectoryLibraries>../target</outputDirectoryLibraries>
-		<apx.core.online.version>7.8.9</apx.core.online.version>
-		<apx.core.batch.version>7.8.2</apx.core.batch.version>
+		<apx.core.online.version>7.10.0</apx.core.online.version>
+		<apx.core.batch.version>7.10.1</apx.core.batch.version>
 		<jacoco.no.coverage>0.00</jacoco.no.coverage>
 		<jacoco.min.coverage>0.80</jacoco.min.coverage>
 		<jacoco.type.coverage>COMPLEXITY</jacoco.type.coverage>
