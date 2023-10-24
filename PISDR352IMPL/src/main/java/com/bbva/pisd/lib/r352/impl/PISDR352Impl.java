@@ -95,6 +95,7 @@ public class PISDR352Impl extends PISDR352Abstract {
 
 	private String getRequestBodyAsJsonFormat(Object requestBody) {
 		LOGGER.info("getRequestBodyAsJsonFormat START *****");
+
 		return JsonHelper.getInstance().toJsonString(requestBody);
 	}
 
