@@ -1,6 +1,5 @@
 package com.bbva.pisd.lib.r352.impl.util;
 
-import com.bbva.pisd.lib.r352.impl.PISDR352Impl;
 import com.google.gson.GsonBuilder;
 import com.google.gson.Gson;
 import com.google.gson.JsonSerializer;
@@ -13,8 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Type;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class JsonHelper {
     private static final Logger LOGGER = LoggerFactory.getLogger(JsonHelper.class);
