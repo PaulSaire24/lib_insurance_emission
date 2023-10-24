@@ -35,6 +35,8 @@ public class JsonHelper {
     }
     public String toJsonString(Object o) {
         LOGGER.info("toJsonString START *****");
+
+        LOGGER.info("getRequestBodyAsJsonFormat requestBody - {}", this.gson.toJson(o));
         return this.gson.toJson(o);
     }
 
