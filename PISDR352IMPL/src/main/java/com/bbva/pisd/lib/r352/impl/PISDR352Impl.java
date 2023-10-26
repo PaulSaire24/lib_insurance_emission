@@ -5,6 +5,7 @@ import com.bbva.pisd.dto.insurance.amazon.SignatureAWS;
 import com.bbva.pisd.lib.r352.impl.util.JsonHelper;
 import com.bbva.rbvd.dto.insrncsale.bo.emision.AgregarTerceroBO;
 import com.bbva.rbvd.dto.insrncsale.bo.emision.EmisionBO;
+import com.bbva.rbvd.dto.insrncsale.utils.RBVDProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
@@ -66,6 +67,12 @@ public class PISDR352Impl extends PISDR352Abstract {
 		String jsonString = this.getRequestBodyAsJsonFormat(requestBody);
 
 		LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** Param: {}", jsonString);
+
+		LOGGER.info("***** PISDR352Impl - applicationConfigurationService ***** Param: {}",
+				this.applicationConfigurationService.getProperty(RBVDProperties.URI_ADD_PARTICIPANTS.getValue()
+						.replace("{idProd}",productId)));
+		LOGGER.info("***** PISDR352Impl - rimacUrlForker ***** Param: {}",
+				this.rimacUrlForker);
 
 		AgregarTerceroBO output = null;
 
