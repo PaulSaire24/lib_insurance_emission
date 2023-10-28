@@ -5,6 +5,7 @@ import com.bbva.pisd.dto.insurance.amazon.SignatureAWS;
 import com.bbva.pisd.lib.r352.impl.util.JsonHelper;
 import com.bbva.rbvd.dto.insrncsale.bo.emision.AgregarTerceroBO;
 import com.bbva.rbvd.dto.insrncsale.bo.emision.EmisionBO;
+import com.bbva.rbvd.dto.insrncsale.utils.RBVDProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
@@ -61,23 +62,22 @@ public class PISDR352Impl extends PISDR352Abstract {
 	@Override
 	public AgregarTerceroBO executeAddParticipantsService(AgregarTerceroBO requestBody, String quotationId, String productId, String traceId) {
 		LOGGER.info("***** PISDR352Impl - executeAddParticipantsService START *****");
+
 		LOGGER.info("***** requestBody: {} :: quotationId: {}", requestBody, quotationId);
 		LOGGER.info("***** productId: {} :: traceId: {}", productId, traceId);
-		String jsonString = this.getRequestBodyAsJsonFormat(requestBody);
 
-		LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** Param: {}", jsonString);
+		String jsonString = this.getRequestBodyAsJsonFormat(requestBody);
+		LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** jsonString: {}", jsonString);
 
 		AgregarTerceroBO output = null;
 
-		SignatureAWS signature = this.pisdR014.executeSignatureConstruction(
-				jsonString,
-				HttpMethod.PATCH.toString(),
-				this.rimacUrlForker.generateUriAddParticipants(quotationId,productId),
-				null,
-				traceId
+		SignatureAWS signature = this.pisdR014.executeSignatureConstruction(jsonString, HttpMethod.PATCH.toString(),
+				this.rimacUrlForker.generateUriAddParticipants(quotationId,productId), null, traceId
 		);
+		LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** signature: {}", signature);
 
 		HttpEntity<String> entity = new HttpEntity<>(jsonString, createHttpHeadersAWS(signature));
+		LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** entity: {}", entity);
 
 		try {
 			ResponseEntity<AgregarTerceroBO> response = this.externalApiConnector.exchange(this.rimacUrlForker.generateKeyAddParticipants(productId),HttpMethod.PATCH, entity,
