@@ -62,29 +62,22 @@ public class PISDR352Impl extends PISDR352Abstract {
 	@Override
 	public AgregarTerceroBO executeAddParticipantsService(AgregarTerceroBO requestBody, String quotationId, String productId, String traceId) {
 		LOGGER.info("***** PISDR352Impl - executeAddParticipantsService START *****");
+
 		LOGGER.info("***** requestBody: {} :: quotationId: {}", requestBody, quotationId);
 		LOGGER.info("***** productId: {} :: traceId: {}", productId, traceId);
+
 		String jsonString = this.getRequestBodyAsJsonFormat(requestBody);
-
-		LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** Param: {}", jsonString);
-
-		LOGGER.info("***** PISDR352Impl - applicationConfigurationService ***** Param: {}",
-				this.applicationConfigurationService.getProperty(RBVDProperties.URI_ADD_PARTICIPANTS.getValue()
-						.replace("{idProd}",productId)));
-		LOGGER.info("***** PISDR352Impl - rimacUrlForker ***** Param: {}",
-				this.rimacUrlForker);
+		LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** jsonString: {}", jsonString);
 
 		AgregarTerceroBO output = null;
 
-		SignatureAWS signature = this.pisdR014.executeSignatureConstruction(
-				jsonString,
-				HttpMethod.PATCH.toString(),
-				this.rimacUrlForker.generateUriAddParticipants(quotationId,productId),
-				null,
-				traceId
+		SignatureAWS signature = this.pisdR014.executeSignatureConstruction(jsonString, HttpMethod.PATCH.toString(),
+				this.rimacUrlForker.generateUriAddParticipants(quotationId,productId), null, traceId
 		);
+		LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** signature: {}", signature);
 
 		HttpEntity<String> entity = new HttpEntity<>(jsonString, createHttpHeadersAWS(signature));
+		LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** entity: {}", entity);
 
 		try {
 			ResponseEntity<AgregarTerceroBO> response = this.externalApiConnector.exchange(this.rimacUrlForker.generateKeyAddParticipants(productId),HttpMethod.PATCH, entity,
