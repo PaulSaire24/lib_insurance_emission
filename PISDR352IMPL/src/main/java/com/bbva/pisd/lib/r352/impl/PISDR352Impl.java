@@ -94,13 +94,13 @@ public class PISDR352Impl extends PISDR352Abstract {
 			LOGGER.info("***** PISDR352Impl - executeAddParticipantsService END *****");
 			return output;
 		} catch (RestClientException ex) {
-			this.addAdviceWithDescription("RBVD10094933",ex.getMessage());
-			this.addAdviceWithDescription("RBVD10094944","Error al devolver informacion del Servicio de Agregar Terceros de Rimac");
+			//this.addAdviceWithDescription("RBVD10094933",ex.getMessage());
+			//this.addAdviceWithDescription("RBVD10094944","Error al devolver informacion del Servicio de Agregar Terceros de Rimac");
 			LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** Exception: {}", ex.getMessage());
 			return null;
 		} catch (TimeoutException ex) {
-			this.addAdviceWithDescription("RBVD10094935",ex.getMessage());
-			this.addAdviceWithDescription("RBVD10094945","Error timeOut");
+			//this.addAdviceWithDescription("RBVD10094935",ex.getMessage());
+			//this.addAdviceWithDescription("RBVD10094945","Error timeOut");
 			LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** Exception: {}", ex.getMessage());
 			return null;
 		}
