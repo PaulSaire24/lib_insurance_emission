@@ -51,12 +51,12 @@ public class PISDR352Impl extends PISDR352Abstract {
 			LOGGER.info("***** PISDR352Impl - executePrePolicyEmissionService ***** Response: {}", getRequestBodyAsJsonFormat(responseBody));
 			LOGGER.info("***** PISDR352Impl - executePrePolicyEmissionService END *****");
 		} catch (RestClientException ex) {
-			this.addAdviceWithDescription("RBVD10094932",ex.getMessage());
-			this.addAdviceWithDescription("RBVD10094943","Error al devolver informacion de Rimac en Alta de Poliza");
+			//this.addAdviceWithDescription("RBVD10094932",ex.getMessage());
+			//this.addAdviceWithDescription("RBVD10094943","Error al devolver informacion de Rimac en Alta de Poliza");
 			LOGGER.info("***** PISDR352Impl - executePrePolicyEmissionService ***** Exception: {}", ex.getMessage());
 		} catch (TimeoutException ex) {
-			this.addAdviceWithDescription("RBVD10094936",ex.getMessage());
-			this.addAdviceWithDescription("RBVD10094946","Error timeOut");
+			//this.addAdviceWithDescription("RBVD10094936",ex.getMessage());
+			//this.addAdviceWithDescription("RBVD10094946","Error timeOut");
 			LOGGER.info("***** PISDR352Impl - executePrePolicyEmissionService ***** Exception: {}", ex.getMessage());
 			return null;
 		}
@@ -94,13 +94,13 @@ public class PISDR352Impl extends PISDR352Abstract {
 			LOGGER.info("***** PISDR352Impl - executeAddParticipantsService END *****");
 			return output;
 		} catch (RestClientException ex) {
-			this.addAdviceWithDescription("RBVD10094933",ex.getMessage());
-			this.addAdviceWithDescription("RBVD10094944","Error al devolver informacion del Servicio de Agregar Terceros de Rimac");
+			//this.addAdviceWithDescription("RBVD10094933",ex.getMessage());
+			//this.addAdviceWithDescription("RBVD10094944","Error al devolver informacion del Servicio de Agregar Terceros de Rimac");
 			LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** Exception: {}", ex.getMessage());
 			return null;
 		} catch (TimeoutException ex) {
-			this.addAdviceWithDescription("RBVD10094935",ex.getMessage());
-			this.addAdviceWithDescription("RBVD10094945","Error timeOut");
+			//this.addAdviceWithDescription("RBVD10094935",ex.getMessage());
+			//this.addAdviceWithDescription("RBVD10094945","Error timeOut");
 			LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** Exception: {}", ex.getMessage());
 			return null;
 		}
