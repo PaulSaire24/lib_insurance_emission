@@ -55,7 +55,13 @@ public class PISDR352Impl extends PISDR352Abstract {
 			this.addAdviceWithDescription("RBVD10094932",ex.getMessage());
 			this.addAdviceWithDescription("RBVD10094943","Error al devolver informacion de Rimac en Alta de Poliza");
 			LOGGER.info("***** PISDR352Impl - executePrePolicyEmissionService ***** Exception: {}", ex.getMessage());
+		} catch (TimeoutException ex) {
+			this.addAdviceWithDescription("RBVD10094936",ex.getMessage());
+			this.addAdviceWithDescription("RBVD10094946","Error timeOut");
+			LOGGER.info("***** PISDR352Impl - executePrePolicyEmissionService ***** Exception: {}", ex.getMessage());
+			return null;
 		}
+
 		return responseBody;
 	}
 
