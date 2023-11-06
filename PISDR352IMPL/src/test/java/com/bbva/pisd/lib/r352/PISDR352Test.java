@@ -139,6 +139,18 @@ public class PISDR352Test {
 	}
 
 	@Test
+	public void testExecutePrePolicyEmissionServiceWithRestClientTimeOutException() {
+		LOGGER.info("PISDR352 - Executing testExecuteAddParticipantsServiceWithRestClientException...");
+
+		when(rimacUrlForker.generatePropertyKeyName(anyString())).thenReturn("value");
+		when(rimacUrlForker.generateUriForSignatureAWS(anyString(), anyString())).thenReturn("value");
+		when(externalApiConnector.postForObject(anyString(), anyObject(), any(), anyMap())).thenThrow(TimeoutException.class);
+
+		EmisionBO rimacResponse = this.pisdr352.executePrePolicyEmissionService(new EmisionBO(), "quotationId", "traceId", "830");
+		assertNull(rimacResponse);
+	}
+
+	@Test
 	public void testExecuteAddParticipantsService_OK() throws IOException{
 		LOGGER.info("PISDR352 - Executing testExecuteAddParticipantsService_OK...");
 		AgregarTerceroBO response = mockData.getAddParticipantsRimacResponse();
