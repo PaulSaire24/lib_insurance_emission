@@ -70,7 +70,7 @@ public class PISDR352Impl extends PISDR352Abstract {
 		LOGGER.info("***** productId: {} :: traceId: {}", productId, traceId);
 
 		LOGGER.info("***** PISDR352Impl:  LOG DE PRUEBA 11 *****");
-		String jsonString = this.getRequestBodyAsJsonFormat(requestBody);
+		String jsonString = getRequestBodyAsJsonFormat(requestBody);
 		LOGGER.info("***** PISDR352Impl - jsonString: {}", jsonString);
 		LOGGER.info("***** PISDR352Impl - jsonString: {}", jsonString.getBytes());
 
