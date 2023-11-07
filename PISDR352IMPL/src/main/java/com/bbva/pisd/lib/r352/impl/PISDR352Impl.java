@@ -95,10 +95,10 @@ public class PISDR352Impl extends PISDR352Abstract {
 				HttpClientErrorException exception = (HttpClientErrorException) ex;
 				LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** Exception: {}", exception.getResponseBodyAsString());
 			}
-			LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** Exception: {}", ex.getMessage());
+			LOGGER.info("***** PISDR352Impl -  ***** RestClientException: {}", ex.getMessage());
 			return null;
 		} catch (TimeoutException ex) {
-			LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** Exception: {}", ex.getMessage());
+			LOGGER.info("***** PISDR352Impl -  ***** TimeoutException: {}", ex.getMessage());
 			return null;
 		}
 
