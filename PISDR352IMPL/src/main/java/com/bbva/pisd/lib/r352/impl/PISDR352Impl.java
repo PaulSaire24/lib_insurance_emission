@@ -13,6 +13,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestClientException;
 
 import java.nio.charset.StandardCharsets;
@@ -91,8 +92,8 @@ public class PISDR352Impl extends PISDR352Abstract {
 			LOGGER.info("***** PISDR352Impl - executeAddParticipantsService END *****");
 			return output;
 		} catch (RestClientException ex) {
-			if(ex instanceof HttpClientErrorException) {
-				HttpClientErrorException exception = (HttpClientErrorException) ex;
+			if(ex instanceof HttpStatusCodeException) {
+				HttpStatusCodeException exception = (HttpClientErrorException) ex;
 				LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** Exception: {}", exception.getResponseBodyAsString());
 			}
 			LOGGER.info("***** PISDR352Impl -  ***** RestClientException: {}", ex.getMessage());
