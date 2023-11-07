@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
-import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestClientException;
 
 import java.nio.charset.StandardCharsets;
@@ -69,7 +68,6 @@ public class PISDR352Impl extends PISDR352Abstract {
 
 		LOGGER.info("***** requestBody: {} :: quotationId: {}", requestBody, quotationId);
 		LOGGER.info("***** productId: {} :: traceId: {}", productId, traceId);
-
 
 		LOGGER.info("***** PISDR352Impl:  LOG DE PRUEBA  *****");
 		String jsonString = this.getRequestBodyAsJsonFormat(requestBody);

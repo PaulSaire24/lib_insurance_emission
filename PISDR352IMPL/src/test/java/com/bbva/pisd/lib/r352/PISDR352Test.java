@@ -190,6 +190,19 @@ public class PISDR352Test {
 	}
 
 	@Test
+	public void testExecuteAddParticipantsServiceWithHttpServerErrorException() {
+		LOGGER.info("PISDR352 - Executing testExecuteAddParticipantsServiceWithRestClientException...");
+
+		String responseBody = "{\"error\":{\"code\":\"VIDA001\",\"message\":\"ErroralValidarDatos.\",\"details\":[\"\\\"persona[0].celular\\\"esrequerido\"],\"httpStatus\":400}}";
+		when(rimacUrlForker.generateUriAddParticipants(anyString(),anyString())).thenReturn("any-value");
+		when(rimacUrlForker.generateKeyAddParticipants(anyString())).thenReturn("any-value");
+		when(this.externalApiConnector.exchange(anyString(), anyObject(),anyObject(), (Class<AgregarTerceroBO>) any(), anyMap())).thenThrow(new HttpServerErrorException(HttpStatus.BAD_REQUEST, "", responseBody.getBytes(), StandardCharsets.UTF_8));
+
+		AgregarTerceroBO validation = this.pisdr352.executeAddParticipantsService(new AgregarTerceroBO(),"quotationId","productId","traceId");
+		assertNull(validation);
+	}
+
+	@Test
 	public void testExecuteAddParticipantsServiceWithRestClientTimeOutException() {
 		LOGGER.info("PISDR352 - Executing testExecuteAddParticipantsServiceWithRestClientException...");
 
