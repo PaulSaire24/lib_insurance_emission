@@ -69,9 +69,10 @@ public class PISDR352Impl extends PISDR352Abstract {
 		LOGGER.info("***** requestBody: {} :: quotationId: {}", requestBody, quotationId);
 		LOGGER.info("***** productId: {} :: traceId: {}", productId, traceId);
 
-		LOGGER.info("***** PISDR352Impl:  LOG DE PRUEBA  *****");
+		LOGGER.info("***** PISDR352Impl:  LOG DE PRUEBA 11 *****");
 		String jsonString = this.getRequestBodyAsJsonFormat(requestBody);
 		LOGGER.info("***** PISDR352Impl - jsonString: {}", jsonString);
+		LOGGER.info("***** PISDR352Impl - jsonString: {}", jsonString.getBytes());
 
 		AgregarTerceroBO output = null;
 
