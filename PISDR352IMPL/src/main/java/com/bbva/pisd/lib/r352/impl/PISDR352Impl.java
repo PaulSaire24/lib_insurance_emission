@@ -12,6 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.MediaType;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
 
 import java.nio.charset.StandardCharsets;
@@ -70,7 +71,7 @@ public class PISDR352Impl extends PISDR352Abstract {
 
 		LOGGER.info("***** PISDR352Impl:  LOG DE PRUEBA  *****");
 		String jsonString = this.getRequestBodyAsJsonFormat(requestBody);
-		LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** jsonString: {}", jsonString);
+		LOGGER.info("***** PISDR352Impl - jsonString: {}", jsonString);
 
 		AgregarTerceroBO output = null;
 
@@ -90,10 +91,14 @@ public class PISDR352Impl extends PISDR352Abstract {
 			LOGGER.info("***** PISDR352Impl - executeAddParticipantsService END *****");
 			return output;
 		} catch (RestClientException ex) {
-			LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** Exception: {}", ex.getMessage());
+			if(ex instanceof HttpClientErrorException) {
+				HttpClientErrorException exception = (HttpClientErrorException) ex;
+				LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** Exception: {}", exception.getResponseBodyAsString());
+			}
+			LOGGER.info("***** PISDR352Impl -  ***** RestClientException: {}", ex.getMessage());
 			return null;
 		} catch (TimeoutException ex) {
-			LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** Exception: {}", ex.getMessage());
+			LOGGER.info("***** PISDR352Impl -  ***** TimeoutException: {}", ex.getMessage());
 			return null;
 		}
 
