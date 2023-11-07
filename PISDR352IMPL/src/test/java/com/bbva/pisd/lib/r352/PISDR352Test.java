@@ -13,6 +13,7 @@ import com.bbva.pisd.lib.r352.impl.util.RimacUrlForker;
 import com.bbva.pisd.mock.MockBundleContext;
 import com.bbva.rbvd.dto.insrncsale.bo.emision.AgregarTerceroBO;
 import com.bbva.rbvd.dto.insrncsale.bo.emision.EmisionBO;
+import com.bbva.rbvd.dto.insrncsale.bo.emision.PayloadAgregarTerceroBO;
 import com.bbva.rbvd.dto.insrncsale.mock.MockData;
 import org.apache.cxf.aegis.type.xml.SourceType;
 import org.junit.Before;
@@ -157,11 +158,16 @@ public class PISDR352Test {
 		LOGGER.info("PISDR352 - Executing testExecuteAddParticipantsService_OK...");
 		AgregarTerceroBO response = mockData.getAddParticipantsRimacResponse();
 
+		PayloadAgregarTerceroBO payloadAgregarTerceroBO = new PayloadAgregarTerceroBO();
+		payloadAgregarTerceroBO.setProducto("840");
+		AgregarTerceroBO agregarTerceroBO = new AgregarTerceroBO();
+		agregarTerceroBO.setPayload(payloadAgregarTerceroBO);
+
 		when(this.rimacUrlForker.generateKeyAddParticipants(anyString())).thenReturn("key.property");
 		when(this.rimacUrlForker.generateUriAddParticipants(anyString(),anyString())).thenReturn("value-key-1");
 		when(this.externalApiConnector.exchange(anyString(), anyObject(),anyObject(), (Class<AgregarTerceroBO>) any(), anyMap())).thenReturn(new ResponseEntity<>(response,HttpStatus.OK));
 
-		AgregarTerceroBO validation = this.pisdr352.executeAddParticipantsService(new AgregarTerceroBO(),"quotationId","840","traceId");
+		AgregarTerceroBO validation = this.pisdr352.executeAddParticipantsService(agregarTerceroBO,"quotationId","840","traceId");
 
 		assertNotNull(validation);
 		assertNotNull(validation.getPayload());
