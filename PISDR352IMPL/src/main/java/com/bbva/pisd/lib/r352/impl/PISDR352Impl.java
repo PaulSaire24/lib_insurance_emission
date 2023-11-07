@@ -94,7 +94,8 @@ public class PISDR352Impl extends PISDR352Abstract {
 		} catch (RestClientException ex) {
 			if(ex instanceof HttpStatusCodeException) {
 				HttpStatusCodeException exception = (HttpClientErrorException) ex;
-				LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** Exception: {}", exception.getResponseBodyAsString());
+				LOGGER.info("***** PISDR352Impl -  ***** Exception: {}", exception);
+				LOGGER.info("***** PISDR352Impl -  ***** Exception: {}", exception.getResponseBodyAsString());
 			}
 			LOGGER.info("***** PISDR352Impl -  ***** RestClientException: {}", ex.getMessage());
 			return null;
