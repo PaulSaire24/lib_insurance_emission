@@ -94,7 +94,6 @@ public class PISDR352Impl extends PISDR352Abstract {
 		} catch (RestClientException ex) {
 			if(ex instanceof HttpStatusCodeException) {
 				HttpStatusCodeException exception = (HttpClientErrorException) ex;
-				LOGGER.info("***** PISDR352Impl -  ***** Exception: {}", exception);
 				LOGGER.info("***** PISDR352Impl -  ***** Exception: {}", exception.getResponseBodyAsString());
 			}
 			LOGGER.info("***** PISDR352Impl -  ***** RestClientException: {}", ex.getMessage());
@@ -107,7 +106,7 @@ public class PISDR352Impl extends PISDR352Abstract {
 	}
 
 	private String getRequestBodyAsJsonFormat(Object requestBody) {
-		LOGGER.info("getRequestBodyAsJsonFormat START *****");
+		LOGGER.info("getRequestBodyAsJsonFormat START {} *****", requestBody);
 
 		return JsonHelper.getInstance().toJsonString(requestBody);
 	}
