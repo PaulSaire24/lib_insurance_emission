@@ -73,8 +73,8 @@ public class PISDR352Impl extends PISDR352Abstract {
 		LOGGER.info("***** PISDR352Impl:  LOG DE PRUEBA 11 *****");
 		String jsonString = getRequestBodyAsJsonFormat(requestBody);
 		Gson gson = new Gson();
-		gson.toJson(requestBody);
-		LOGGER.info("***** PISDR352Impl - gson: {}", gson);
+		String jjj = gson.toJson(requestBody);
+		LOGGER.info("***** PISDR352Impl - gson: {}", jjj);
 		LOGGER.info("***** PISDR352Impl - jsonString: {}", jsonString);
 
 		AgregarTerceroBO output = null;
