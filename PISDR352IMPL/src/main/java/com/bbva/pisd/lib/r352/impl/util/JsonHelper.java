@@ -22,7 +22,7 @@ public class JsonHelper {
     private JsonHelper() {
         gson = new GsonBuilder()
                 .setDateFormat(DATE)
-                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+                //.registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
                 .create();
     }
 
