@@ -5,6 +5,7 @@ import com.bbva.pisd.dto.insurance.amazon.SignatureAWS;
 import com.bbva.pisd.lib.r352.impl.util.JsonHelper;
 import com.bbva.rbvd.dto.insrncsale.bo.emision.AgregarTerceroBO;
 import com.bbva.rbvd.dto.insrncsale.bo.emision.EmisionBO;
+import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
@@ -71,10 +72,12 @@ public class PISDR352Impl extends PISDR352Abstract {
 
 		LOGGER.info("***** PISDR352Impl:  LOG DE PRUEBA 11 *****");
 		String jsonString = getRequestBodyAsJsonFormat(requestBody);
+		Gson gson = new Gson();
+		gson.toJson(requestBody);
+		LOGGER.info("***** PISDR352Impl - gson: {}", gson);
 		LOGGER.info("***** PISDR352Impl - jsonString: {}", jsonString);
 
 		AgregarTerceroBO output = null;
-
 		SignatureAWS signature = this.pisdR014.executeSignatureConstruction(jsonString, HttpMethod.PATCH.toString(),
 				this.rimacUrlForker.generateUriAddParticipants(quotationId,productId), null, traceId
 		);
