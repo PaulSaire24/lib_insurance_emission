@@ -71,7 +71,7 @@ public class PISDR352Impl extends PISDR352Abstract {
 		LOGGER.info("***** requestBody: {} :: quotationId: {}", requestBody, quotationId);
 		LOGGER.info("***** productId: {} :: traceId: {}", productId, traceId);
 
-		LOGGER.info("***** PISDR352Impl:  LOG DE PRUEBA 11 *****");
+		LOGGER.info("***** PISDR352Impl:  LOG DE PRUEBA 12 *****");
 		String jsonString = getRequestBodyAsJsonFormat(requestBody);
 		Gson gson = new Gson();
 		String jjj = gson.toJson(requestBody);
