@@ -71,7 +71,7 @@ public class PISDR352Impl extends PISDR352Abstract {
 		LOGGER.info("***** requestBody: {} :: quotationId: {}", requestBody, quotationId);
 		LOGGER.info("***** productId: {} :: traceId: {}", productId, traceId);
 
-		LOGGER.info("***** PISDR352Impl:  LOG DE PRUEBA 12 *****");
+		LOGGER.info("***** PISDR352Impl:  LOG DE PRUEBA 13 *****");
 		String jsonString = getRequestBodyAsJsonFormat(requestBody);
 		Gson gson = new Gson();
 		String jjj = gson.toJson(requestBody);
@@ -91,7 +91,7 @@ public class PISDR352Impl extends PISDR352Abstract {
 			ResponseEntity<AgregarTerceroBO> response = this.externalApiConnector.exchange(this.rimacUrlForker.generateKeyAddParticipants(productId),HttpMethod.PATCH, entity,
 					AgregarTerceroBO.class, singletonMap("cotizacion",quotationId));
 			output = response.getBody();
-			LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** Response: {}", this.getRequestBodyAsJsonFormat(output));
+			LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** Response: {}", output.toString());
 			LOGGER.info("***** PISDR352Impl - executeAddParticipantsService END *****");
 			return output;
 		} catch (RestClientException ex) {
