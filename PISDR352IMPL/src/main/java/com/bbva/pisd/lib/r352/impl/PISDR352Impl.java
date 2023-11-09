@@ -5,7 +5,6 @@ import com.bbva.pisd.dto.insurance.amazon.SignatureAWS;
 import com.bbva.pisd.lib.r352.impl.util.JsonHelper;
 import com.bbva.rbvd.dto.insrncsale.bo.emision.AgregarTerceroBO;
 import com.bbva.rbvd.dto.insrncsale.bo.emision.EmisionBO;
-import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
@@ -13,8 +12,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.MediaType;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestClientException;
 
@@ -55,9 +52,12 @@ public class PISDR352Impl extends PISDR352Abstract {
 			LOGGER.info("***** PISDR352Impl - executePrePolicyEmissionService ***** Response: {}", getRequestBodyAsJsonFormat(responseBody));
 			LOGGER.info("***** PISDR352Impl - executePrePolicyEmissionService END *****");
 		} catch (RestClientException ex) {
-			LOGGER.info("***** PISDR352Impl - executePrePolicyEmissionService ***** Exception: {}", ex.getMessage());
+			HttpStatusCodeException exception = (HttpStatusCodeException) ex;
+			LOGGER.info("***** PISDR352Impl -  ***** HttpStatusCodeException: {}", exception.getResponseBodyAsString());
+			LOGGER.info("***** PISDR352Impl -  ***** RestClientException: {}", ex.getMessage());
+			return null;
 		} catch (TimeoutException ex) {
-			LOGGER.info("***** PISDR352Impl - executePrePolicyEmissionService ***** Exception: {}", ex.getMessage());
+			LOGGER.info("***** PISDR352Impl -  ***** TimeoutException: {}", ex.getMessage());
 			return null;
 		}
 
@@ -71,11 +71,7 @@ public class PISDR352Impl extends PISDR352Abstract {
 		LOGGER.info("***** requestBody: {} :: quotationId: {}", requestBody, quotationId);
 		LOGGER.info("***** productId: {} :: traceId: {}", productId, traceId);
 
-		LOGGER.info("***** PISDR352Impl:  LOG DE PRUEBA 13 *****");
 		String jsonString = getRequestBodyAsJsonFormat(requestBody);
-		Gson gson = new Gson();
-		String jjj = gson.toJson(requestBody);
-		LOGGER.info("***** PISDR352Impl - gson: {}", jjj);
 		LOGGER.info("***** PISDR352Impl - jsonString: {}", jsonString);
 
 		AgregarTerceroBO output = null;
@@ -91,7 +87,7 @@ public class PISDR352Impl extends PISDR352Abstract {
 			ResponseEntity<AgregarTerceroBO> response = this.externalApiConnector.exchange(this.rimacUrlForker.generateKeyAddParticipants(productId),HttpMethod.PATCH, entity,
 					AgregarTerceroBO.class, singletonMap("cotizacion",quotationId));
 			output = response.getBody();
-			LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** Response: {}", output.toString());
+			LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** Response: {}", output.getPayload().getMensaje());
 			LOGGER.info("***** PISDR352Impl - executeAddParticipantsService END *****");
 			return output;
 		} catch (RestClientException ex) {
@@ -113,6 +109,7 @@ public class PISDR352Impl extends PISDR352Abstract {
 	}
 
 	private HttpHeaders createHttpHeadersAWS(SignatureAWS signature) {
+		LOGGER.info("createHttpHeadersAWS START {} *****", signature);
 		HttpHeaders headers = new HttpHeaders();
 		MediaType mediaType = new MediaType("application","json", StandardCharsets.UTF_8);
 		headers.setContentType(mediaType);
@@ -120,6 +117,8 @@ public class PISDR352Impl extends PISDR352Abstract {
 		headers.set(X_AMZ_DATE_HEADER, signature.getxAmzDate());
 		headers.set(X_API_KEY_HEADER, signature.getxApiKey());
 		headers.set(TRACE_ID_HEADER, signature.getTraceId());
+
+		LOGGER.info("createHttpHeadersAWS END *****");
 		return headers;
 	}
 }
