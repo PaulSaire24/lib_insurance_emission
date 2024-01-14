@@ -21,6 +21,11 @@
 			<artifactId>RBVDC201</artifactId>
 			<version>0.20.3</version>
 		</dependency>
+		<dependency>
+			<groupId>com.bbva.rbvd.dto.renovation</groupId>
+			<artifactId>RBVDC116</artifactId>
+			<version>0.1.0</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>${project.artifactId}</finalName>
