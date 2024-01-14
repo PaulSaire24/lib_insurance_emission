@@ -2,6 +2,7 @@ package com.bbva.pisd.lib.r352.impl;
 
 import com.bbva.apx.exception.io.network.TimeoutException;
 import com.bbva.pisd.dto.insurance.amazon.SignatureAWS;
+import com.bbva.pisd.lib.r352.impl.util.ErrorHelper;
 import com.bbva.pisd.lib.r352.impl.util.JsonHelper;
 import com.bbva.rbvd.dto.insrncsale.bo.emision.AgregarTerceroBO;
 import com.bbva.rbvd.dto.insrncsale.bo.emision.EmisionBO;
@@ -52,9 +53,9 @@ public class PISDR352Impl extends PISDR352Abstract {
 			LOGGER.info("***** PISDR352Impl - executePrePolicyEmissionService ***** Response: {}", getRequestBodyAsJsonFormat(responseBody));
 			LOGGER.info("***** PISDR352Impl - executePrePolicyEmissionService END *****");
 		} catch (RestClientException ex) {
-			HttpStatusCodeException exception = (HttpStatusCodeException) ex;
-			LOGGER.info("***** PISDR352Impl -  ***** HttpStatusCodeException: {}", exception.getResponseBodyAsString());
-			LOGGER.info("***** PISDR352Impl -  ***** RestClientException: {}", ex.getMessage());
+			String message = ErrorHelper.getMessageErrorResponseFromRimac(ex);
+			LOGGER.info("***** PISDR352Impl -  ***** executePrePolicyEmissionService - RestClientException: {}", message);
+			LOGGER.info("***** PISDR352Impl -  ***** executePrePolicyEmissionService - RestClientException: {}", ex.getMessage());
 			return null;
 		} catch (TimeoutException ex) {
 			LOGGER.info("***** PISDR352Impl -  ***** TimeoutException: {}", ex.getMessage());
@@ -91,9 +92,9 @@ public class PISDR352Impl extends PISDR352Abstract {
 			LOGGER.info("***** PISDR352Impl - executeAddParticipantsService END *****");
 			return output;
 		} catch (RestClientException ex) {
-			HttpStatusCodeException exception = (HttpStatusCodeException) ex;
-			LOGGER.info("***** PISDR352Impl -  ***** HttpStatusCodeException: {}", exception.getResponseBodyAsString());
-			LOGGER.info("***** PISDR352Impl -  ***** RestClientException: {}", ex.getMessage());
+			String message = ErrorHelper.getMessageErrorResponseFromRimac(ex);
+			LOGGER.info("***** PISDR352Impl -  ***** executeAddParticipantsService - RestClientException: {}", message);
+			LOGGER.info("***** PISDR352Impl -  ***** executeAddParticipantsService - RestClientException: {}", ex.getMessage());
 			return null;
 		} catch (TimeoutException ex) {
 			LOGGER.info("***** PISDR352Impl -  ***** TimeoutException: {}", ex.getMessage());
