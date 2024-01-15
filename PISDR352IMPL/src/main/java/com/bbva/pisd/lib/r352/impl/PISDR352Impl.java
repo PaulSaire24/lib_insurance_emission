@@ -49,6 +49,8 @@ public class PISDR352Impl extends PISDR352Abstract {
 	private static final String FIELD_USER_AUDIT_ID = "USER_AUDIT_ID";
 	private static final Integer DOSCIENTOS_CINCUENTA_Y_CINCO = 254;
 	public static final String PISDJ351 = "PISDJ351";
+	public static final String ACCOUNT = "4030204777";
+	public static final String ERROR_ID = "PISD35100400";
 
 	@Override
 	public EmisionBO executePrePolicyEmissionService(EmisionBO requestBody, String quotationId, String traceId, String productId){
@@ -90,9 +92,9 @@ public class PISDR352Impl extends PISDR352Abstract {
 			params.put(FIELD_INCIDENT_SEQL_NUMBER, resultIndex);
 			params.put(FIELD_INSURANCE_CONTRACT_ENTITY_ID, "0011" );
 			params.put(FIELD_INSURANCE_CONTRACT_BRANCH_ID, "0130" );
-			params.put(FIELD_INSRC_CONTRACT_INT_ACCOUNT_ID, "4030204777" );
+			params.put(FIELD_INSRC_CONTRACT_INT_ACCOUNT_ID, ACCOUNT );
 			params.put(FIELD_OPERATION_DATE, null );
-			params.put(FIELD_INCIDENCE_ERROR_ID, "PISD35100400" );
+			params.put(FIELD_INCIDENCE_ERROR_ID, ERROR_ID );
 			params.put(FIELD_INCIDENCE_ERROR_DESC, StringUtils.left(message, DOSCIENTOS_CINCUENTA_Y_CINCO) );
 			params.put(FIELD_POLICY_RECEIPT_ID, null );
 			params.put(FIELD_AUTH_ORIGIN_CURNCY_ID, null );
@@ -124,9 +126,9 @@ public class PISDR352Impl extends PISDR352Abstract {
 			params.put(FIELD_INCIDENT_SEQL_NUMBER, resultIndex);
 			params.put(FIELD_INSURANCE_CONTRACT_ENTITY_ID, "0011" );
 			params.put(FIELD_INSURANCE_CONTRACT_BRANCH_ID, "0130" );
-			params.put(FIELD_INSRC_CONTRACT_INT_ACCOUNT_ID, "4030204777" );
+			params.put(FIELD_INSRC_CONTRACT_INT_ACCOUNT_ID, ACCOUNT );
 			params.put(FIELD_OPERATION_DATE, null );
-			params.put(FIELD_INCIDENCE_ERROR_ID, "PISD35100400" );
+			params.put(FIELD_INCIDENCE_ERROR_ID, ERROR_ID );
 			params.put(FIELD_INCIDENCE_ERROR_DESC, StringUtils.left(message, DOSCIENTOS_CINCUENTA_Y_CINCO) );
 			params.put(FIELD_POLICY_RECEIPT_ID, null );
 			params.put(FIELD_AUTH_ORIGIN_CURNCY_ID, null );
@@ -134,7 +136,7 @@ public class PISDR352Impl extends PISDR352Abstract {
 			params.put(FIELD_OPERATION_STATUS_ID, "01" );
 			params.put(FIELD_CREATION_USER_ID, PISDJ351 );
 			params.put(FIELD_USER_AUDIT_ID,  PISDJ351 );
-			LOGGER.info("[PISDR352Impl] - cratedIncident() :: Incident with param:: {}", params);
+			LOGGER.info("cratedIncident() :: param:: {}", params);
 			OperationDTO operation1 = OperationDTO.Builder.an()
 					.withNameProp(QUERY_INSERT_INSURANCE_INCIDENT)
 					.withTypeOperation(PISDConstant.Operation.UPDATE)
@@ -195,9 +197,9 @@ public class PISDR352Impl extends PISDR352Abstract {
 			params.put(FIELD_INCIDENT_SEQL_NUMBER, resultIndex);
 			params.put(FIELD_INSURANCE_CONTRACT_ENTITY_ID, "0011" );
 			params.put(FIELD_INSURANCE_CONTRACT_BRANCH_ID, "0130" );
-			params.put(FIELD_INSRC_CONTRACT_INT_ACCOUNT_ID, "4030204777" );
+			params.put(FIELD_INSRC_CONTRACT_INT_ACCOUNT_ID, ACCOUNT );
 			params.put(FIELD_OPERATION_DATE, null );
-			params.put(FIELD_INCIDENCE_ERROR_ID, "PISD35100400" );
+			params.put(FIELD_INCIDENCE_ERROR_ID, ERROR_ID );
 			params.put(FIELD_INCIDENCE_ERROR_DESC, StringUtils.left(message, DOSCIENTOS_CINCUENTA_Y_CINCO) );
 			params.put(FIELD_POLICY_RECEIPT_ID, null );
 			params.put(FIELD_AUTH_ORIGIN_CURNCY_ID, null );
@@ -205,7 +207,7 @@ public class PISDR352Impl extends PISDR352Abstract {
 			params.put(FIELD_OPERATION_STATUS_ID, "01" );
 			params.put(FIELD_CREATION_USER_ID, PISDJ351 );
 			params.put(FIELD_USER_AUDIT_ID,  PISDJ351 );
-			LOGGER.info("[PISDR352Impl] - cratedIncident() :: Incident with param:: {}", params);
+			LOGGER.info("param:: {}", params);
 			OperationDTO operation1 = OperationDTO.Builder.an()
 					.withNameProp(QUERY_INSERT_INSURANCE_INCIDENT)
 					.withTypeOperation(PISDConstant.Operation.UPDATE)
@@ -229,9 +231,9 @@ public class PISDR352Impl extends PISDR352Abstract {
 			params.put(FIELD_INCIDENT_SEQL_NUMBER, resultIndex);
 			params.put(FIELD_INSURANCE_CONTRACT_ENTITY_ID, "0011" );
 			params.put(FIELD_INSURANCE_CONTRACT_BRANCH_ID, "0130" );
-			params.put(FIELD_INSRC_CONTRACT_INT_ACCOUNT_ID, "4030204777" );
+			params.put(FIELD_INSRC_CONTRACT_INT_ACCOUNT_ID, ACCOUNT );
 			params.put(FIELD_OPERATION_DATE, null );
-			params.put(FIELD_INCIDENCE_ERROR_ID, "PISD35100400" );
+			params.put(FIELD_INCIDENCE_ERROR_ID, ERROR_ID );
 			params.put(FIELD_INCIDENCE_ERROR_DESC, StringUtils.left(message, DOSCIENTOS_CINCUENTA_Y_CINCO) );
 			params.put(FIELD_POLICY_RECEIPT_ID, null );
 			params.put(FIELD_AUTH_ORIGIN_CURNCY_ID, null );
@@ -239,7 +241,7 @@ public class PISDR352Impl extends PISDR352Abstract {
 			params.put(FIELD_OPERATION_STATUS_ID, "01" );
 			params.put(FIELD_CREATION_USER_ID, PISDJ351 );
 			params.put(FIELD_USER_AUDIT_ID,  PISDJ351 );
-			LOGGER.info("[PISDR352Impl] - cratedIncident() :: Incident with param:: {}", params);
+			LOGGER.info("[PISDR352Impl] - PARAMS:: {}", params);
 			OperationDTO operation1 = OperationDTO.Builder.an()
 					.withNameProp(QUERY_INSERT_INSURANCE_INCIDENT)
 					.withTypeOperation(PISDConstant.Operation.UPDATE)
