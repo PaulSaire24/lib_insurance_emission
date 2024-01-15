@@ -16,6 +16,10 @@ public class ErrorHelper {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ErrorHelper.class);
 
+    private ErrorHelper() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static String getMessageErrorResponseFromRimac(RestClientException exception) {
         LOGGER.info("getMessageErrorResponseFromRimac :: Start - {}", exception.getMessage());
 
