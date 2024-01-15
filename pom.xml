@@ -8,7 +8,7 @@
 	</parent>
 	<groupId>com.bbva.pisd</groupId>
 	<artifactId>PISDR352-parent</artifactId>
-	<version>0.5.3</version>
+	<version>0.5.4</version>
 	<name>PISDR352-parent</name>
 	<description>Deployment unit lib_insurance_emission of uuaa pisd</description>
 	<packaging>pom</packaging>
