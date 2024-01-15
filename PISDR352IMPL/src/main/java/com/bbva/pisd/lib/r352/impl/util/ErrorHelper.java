@@ -25,10 +25,10 @@ public class ErrorHelper {
             String responseBody = httpClientErrorException.getResponseBodyAsString();
             LOGGER.info("HttpClientErrorException - Response body: {}", responseBody);
 
-            ErrorRimacBO errorRimacBO = getErrorObject(responseBody);
-            String resultMessage = extractResponseFromRimac(errorRimacBO);
+            //ErrorRimacBO errorRimacBO = getErrorObject(responseBody);
+            //String resultMessage = extractResponseFromRimac(errorRimacBO);
 
-            if(resultMessage.equalsIgnoreCase(RBVDConstant.MessageResponse.NO_ERROR_RESPONSE)){
+            /*if(resultMessage.equalsIgnoreCase(RBVDConstant.MessageResponse.NO_ERROR_RESPONSE)){
                 String mostSpecificCause = httpClientErrorException.getMostSpecificCause().getMessage();
 
                 LOGGER.info("getMessageErrorResponseFromRimac :: End - mostSpecificCause - {}", mostSpecificCause);
@@ -36,9 +36,9 @@ public class ErrorHelper {
                 return  Objects.isNull(mostSpecificCause) ? RBVDConstant.MessageResponse.NO_ERROR_RESPONSE : mostSpecificCause;
             }
 
-            LOGGER.info("getMessageErrorResponseFromRimac :: End - resultMessage - {}", resultMessage);
+            LOGGER.info("getMessageErrorResponseFromRimac :: End - resultMessage - {}", resultMessage);*/
 
-            return resultMessage;
+            return responseBody;
         }
 
         LOGGER.info("RimacExceptionHandler not instanceof HttpServerErrorException");
