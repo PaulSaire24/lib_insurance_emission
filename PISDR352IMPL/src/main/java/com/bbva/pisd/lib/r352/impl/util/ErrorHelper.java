@@ -1,16 +1,9 @@
 package com.bbva.pisd.lib.r352.impl.util;
 
-import com.bbva.rbvd.dto.renovation.constants.RBVDConstant;
-import com.bbva.rbvd.dto.renovation.external.ErrorRimacBO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
 
 public class ErrorHelper {
 

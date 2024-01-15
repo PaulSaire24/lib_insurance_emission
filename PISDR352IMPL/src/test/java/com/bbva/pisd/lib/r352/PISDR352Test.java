@@ -8,6 +8,7 @@ import com.bbva.elara.utility.api.connector.APIConnector;
 import com.bbva.pisd.dto.insurance.amazon.SignatureAWS;
 import com.bbva.pisd.dto.insurance.bo.registeradditional.RegisterAdditionalVehBO;
 import com.bbva.pisd.lib.r014.PISDR014;
+import com.bbva.pisd.lib.r201.PISDR201;
 import com.bbva.pisd.lib.r352.factory.ApiConnectorFactoryMock;
 import com.bbva.pisd.lib.r352.impl.PISDR352Impl;
 import com.bbva.pisd.lib.r352.impl.util.RimacUrlForker;
@@ -20,6 +21,7 @@ import org.apache.cxf.aegis.type.xml.SourceType;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
@@ -33,6 +35,8 @@ import org.springframework.web.client.RestClientException;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -56,6 +60,7 @@ public class PISDR352Test {
 	private static final Logger LOGGER = LoggerFactory.getLogger(PISDR352Test.class);
 	private PISDR352Impl pisdr352 = new PISDR352Impl();
 	private PISDR014 pisdr014;
+	private PISDR201 pisdr201;
 	private MockData mockData;
 	private APIConnector externalApiConnector;
 	private RimacUrlForker rimacUrlForker;
@@ -76,6 +81,9 @@ public class PISDR352Test {
 		pisdr014 = mock(PISDR014.class);
 		pisdr352.setPisdR014(pisdr014);
 
+		pisdr201 = mock(PISDR201.class);
+		pisdr352.setPisdR201(pisdr201);
+
 		rimacUrlForker = mock(RimacUrlForker.class);
 		pisdr352.setRimacUrlForker(rimacUrlForker);
 
@@ -86,11 +94,14 @@ public class PISDR352Test {
 	@Test
 	public void executePrePolicyEmissionServiceWithRestClientException() {
 		LOGGER.info("PISDR352 - Executing executePrePolicyEmissionServiceWithRestClientException...");
+		Map<String, Object> resultIncidentIdSeq =  new HashMap<>();
+		resultIncidentIdSeq.put("NEW_INCIDENT_SEQL_NUMBER", "488885341");
 
 		String responseBody = "{\"error\":{\"code\":\"VEHDAT005\",\"message\":\"Error al Validar Datos.\",\"details\":[\"\\\"contactoInspeccion.telefono\\\" debe contener caracteres\"],\"httpStatus\":400}}";
 		when(rimacUrlForker.generatePropertyKeyName(anyString())).thenReturn("value");
 		when(rimacUrlForker.generateUriForSignatureAWS(anyString(), anyString())).thenReturn("value");
 		when(externalApiConnector.postForObject(anyString(), anyObject(), any(), anyMap())).thenThrow(new HttpServerErrorException(HttpStatus.BAD_REQUEST, "", responseBody.getBytes(), StandardCharsets.UTF_8));
+		when(pisdr201.executeQuery(Mockito.anyObject())).thenReturn(resultIncidentIdSeq).thenReturn(1);
 
 		EmisionBO rimacResponse = pisdr352.executePrePolicyEmissionService(new EmisionBO(), "quotationId", "traceId", "830");
 		assertNull(rimacResponse);
@@ -188,7 +199,10 @@ public class PISDR352Test {
 	@Test
 	public void testExecuteAddParticipantsServiceWithRestClientException() {
 		LOGGER.info("PISDR352 - Executing testExecuteAddParticipantsServiceWithRestClientException...");
+		Map<String, Object> resultIncidentIdSeq =  new HashMap<>();
+		resultIncidentIdSeq.put("NEW_INCIDENT_SEQL_NUMBER", "488885341");
 
+		when(pisdr201.executeQuery(Mockito.anyObject())).thenReturn(resultIncidentIdSeq).thenReturn(1);
 		String responseBody = "{\"error\":{\"code\":\"VIDA001\",\"message\":\"ErroralValidarDatos.\",\"details\":[\"\\\"persona[0].celular\\\"esrequerido\"],\"httpStatus\":400}}";
 		when(rimacUrlForker.generateUriAddParticipants(anyString(),anyString())).thenReturn("any-value");
 		when(rimacUrlForker.generateKeyAddParticipants(anyString())).thenReturn("any-value");
@@ -225,6 +239,10 @@ public class PISDR352Test {
 	@Test
 	public void testExecutePrePolicyEmissionServiceWithHttpStatusCodeException() {
 		LOGGER.info("PISDR352 - Executing testExecuteAddParticipantsServiceWithRestClientException...");
+		Map<String, Object> resultIncidentIdSeq =  new HashMap<>();
+		resultIncidentIdSeq.put("NEW_INCIDENT_SEQL_NUMBER", "488885341");
+
+		when(pisdr201.executeQuery(Mockito.anyObject())).thenReturn(resultIncidentIdSeq).thenReturn(1);
 		when(externalApiConnector.postForObject(anyString(), anyObject(), any(), anyMap()))
 				.thenThrow(new RestClientException("CONNECTION ERROR"));
 		EmisionBO rimacResponse = this.pisdr352.executePrePolicyEmissionService(new EmisionBO(), "quotationId", "traceId", "830");
