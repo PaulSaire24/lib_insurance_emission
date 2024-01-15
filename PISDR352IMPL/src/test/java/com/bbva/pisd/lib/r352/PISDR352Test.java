@@ -6,6 +6,7 @@ import com.bbva.elara.domain.transaction.ThreadContext;
 
 import com.bbva.elara.utility.api.connector.APIConnector;
 import com.bbva.pisd.dto.insurance.amazon.SignatureAWS;
+import com.bbva.pisd.dto.insurance.bo.registeradditional.RegisterAdditionalVehBO;
 import com.bbva.pisd.lib.r014.PISDR014;
 import com.bbva.pisd.lib.r352.factory.ApiConnectorFactoryMock;
 import com.bbva.pisd.lib.r352.impl.PISDR352Impl;
@@ -21,12 +22,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.client.RestClientException;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -189,7 +192,8 @@ public class PISDR352Test {
 		String responseBody = "{\"error\":{\"code\":\"VIDA001\",\"message\":\"ErroralValidarDatos.\",\"details\":[\"\\\"persona[0].celular\\\"esrequerido\"],\"httpStatus\":400}}";
 		when(rimacUrlForker.generateUriAddParticipants(anyString(),anyString())).thenReturn("any-value");
 		when(rimacUrlForker.generateKeyAddParticipants(anyString())).thenReturn("any-value");
-		when(this.externalApiConnector.exchange(anyString(), anyObject(),anyObject(), (Class<AgregarTerceroBO>) any(), anyMap())).thenThrow(new HttpClientErrorException(HttpStatus.BAD_REQUEST, "", responseBody.getBytes(), StandardCharsets.UTF_8));
+		when(this.externalApiConnector.exchange(anyString(), anyObject(),anyObject(), (Class<AgregarTerceroBO>) any(), anyMap()))
+				.thenThrow(new HttpClientErrorException(HttpStatus.BAD_REQUEST, "", responseBody.getBytes(), StandardCharsets.UTF_8));
 
 		AgregarTerceroBO validation = this.pisdr352.executeAddParticipantsService(new AgregarTerceroBO(),"quotationId","productId","traceId");
 		assertNull(validation);
@@ -202,10 +206,29 @@ public class PISDR352Test {
 		String responseBody = "{\"error\":{\"code\":\"VIDA001\",\"message\":\"ErroralValidarDatos.\",\"details\":[\"\\\"persona[0].celular\\\"esrequerido\"],\"httpStatus\":400}}";
 		when(rimacUrlForker.generateUriAddParticipants(anyString(),anyString())).thenReturn("any-value");
 		when(rimacUrlForker.generateKeyAddParticipants(anyString())).thenReturn("any-value");
-		when(this.externalApiConnector.exchange(anyString(), anyObject(),anyObject(), (Class<AgregarTerceroBO>) any(), anyMap())).thenThrow(new HttpServerErrorException(HttpStatus.BAD_REQUEST, "", responseBody.getBytes(), StandardCharsets.UTF_8));
+		when(this.externalApiConnector.exchange(anyString(), anyObject(),anyObject(), (Class<AgregarTerceroBO>) any(), anyMap()))
+				.thenThrow(new HttpServerErrorException(HttpStatus.BAD_REQUEST, "", responseBody.getBytes(), StandardCharsets.UTF_8));
 
 		AgregarTerceroBO validation = this.pisdr352.executeAddParticipantsService(new AgregarTerceroBO(),"quotationId","productId","traceId");
 		assertNull(validation);
+	}
+
+	@Test
+	public void testExecuteAddParticipantsServiceWithHttpStatusCodeException() {
+		LOGGER.info("PISDR352 - Executing testExecuteAddParticipantsServiceWithRestClientException...");
+		when(externalApiConnector.exchange(anyString(), any(HttpMethod.class), anyObject(), (Class<AgregarTerceroBO>) any(), anyMap()))
+				.thenThrow(new RestClientException("CONNECTION ERROR"));
+		AgregarTerceroBO validation = this.pisdr352.executeAddParticipantsService(new AgregarTerceroBO(),"quotationId","productId","traceId");
+		assertNull(validation);
+	}
+
+	@Test
+	public void testExecutePrePolicyEmissionServiceWithHttpStatusCodeException() {
+		LOGGER.info("PISDR352 - Executing testExecuteAddParticipantsServiceWithRestClientException...");
+		when(externalApiConnector.postForObject(anyString(), anyObject(), any(), anyMap()))
+				.thenThrow(new RestClientException("CONNECTION ERROR"));
+		EmisionBO rimacResponse = this.pisdr352.executePrePolicyEmissionService(new EmisionBO(), "quotationId", "traceId", "830");
+		assertNull(rimacResponse);
 	}
 
 	@Test

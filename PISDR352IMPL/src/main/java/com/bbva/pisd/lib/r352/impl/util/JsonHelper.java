@@ -36,11 +36,6 @@ public class JsonHelper {
         return this.gson.toJson(o);
     }
 
-    public <T> T fromString(String src, Class<T> clazz) {
-        LOGGER.info("fromString START *****");
-        return this.gson.fromJson(src, clazz);
-    }
-
 }
 
 class LocalDateAdapter implements JsonSerializer<LocalDate> {
