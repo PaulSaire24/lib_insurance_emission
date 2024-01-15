@@ -56,7 +56,7 @@ public class PISDR352Impl extends PISDR352Abstract {
 			String message = ex.getResponseBodyAsString();
 			LOGGER.info("***** PISDR352Impl -  ***** executePrePolicyEmissionService - HttpStatusCodeException: {}", message);
 			return null;
-		}catch (RestClientException ex) {
+		} catch (RestClientException ex) {
 			String message = ErrorHelper.getMessageErrorResponseFromRimac(ex);
 			LOGGER.info("***** PISDR352Impl -  ***** executePrePolicyEmissionService - RestClientException: {}", message);
 			LOGGER.info("***** PISDR352Impl -  ***** executePrePolicyEmissionService - RestClientException: {}", ex.getMessage());
@@ -95,11 +95,11 @@ public class PISDR352Impl extends PISDR352Abstract {
 			LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** Response: {}", output.getPayload().getMensaje());
 			LOGGER.info("***** PISDR352Impl - executeAddParticipantsService END *****");
 			return output;
-		}  	catch (HttpStatusCodeException ex){
+		} catch (HttpStatusCodeException ex){
 			String message = ex.getResponseBodyAsString();
 			LOGGER.info("***** PISDR352Impl -  ***** executeAddParticipantsService - HttpStatusCodeException: {}", message);
 			return null;
-		}	catch (RestClientException ex) {
+		} catch (RestClientException ex) {
 			String message = ErrorHelper.getMessageErrorResponseFromRimac(ex);
 			LOGGER.info("***** PISDR352Impl -  ***** executeAddParticipantsService - RestClientException: {}", message);
 			LOGGER.info("***** PISDR352Impl -  ***** executeAddParticipantsService - RestClientException: {}", ex.getMessage());

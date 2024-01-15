@@ -47,7 +47,7 @@ public class ErrorHelper {
         return exception.getMostSpecificCause().getMessage();
     }
 
-    public static String extractResponseFromRimac(ErrorRimacBO errorRimacBO){
+    /*public static String extractResponseFromRimac(ErrorRimacBO errorRimacBO){
         LOGGER.info("extractResponseFromRimac :: Start - {}", errorRimacBO);
 
         if(Objects.isNull(errorRimacBO)){
@@ -73,6 +73,6 @@ public class ErrorHelper {
     private static ErrorRimacBO getErrorObject(String responseBody) {
         LOGGER.info("getErrorObject :: Start");
         return JsonHelper.getInstance().fromString(responseBody, ErrorRimacBO.class);
-    }
+    }*/
 
 }
