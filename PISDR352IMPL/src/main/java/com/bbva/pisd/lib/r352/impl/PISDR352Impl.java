@@ -48,6 +48,7 @@ public class PISDR352Impl extends PISDR352Abstract {
 	private static final String FIELD_CREATION_USER_ID = "CREATION_USER_ID";
 	private static final String FIELD_USER_AUDIT_ID = "USER_AUDIT_ID";
 	private static final Integer DOSCIENTOS_CINCUENTA_Y_CINCO = 254;
+	public static final String PISDJ351 = "PISDJ351";
 
 	@Override
 	public EmisionBO executePrePolicyEmissionService(EmisionBO requestBody, String quotationId, String traceId, String productId){
@@ -96,8 +97,8 @@ public class PISDR352Impl extends PISDR352Abstract {
 			params.put(FIELD_AUTH_ORIGIN_CURNCY_ID, null );
 			params.put(FIELD_DEBIT_ACCOUNT_ID, null );
 			params.put(FIELD_OPERATION_STATUS_ID, "01" );
-			params.put(FIELD_CREATION_USER_ID, "PISDJ351" );
-			params.put(FIELD_USER_AUDIT_ID,  "PISDJ351" );
+			params.put(FIELD_CREATION_USER_ID, PISDJ351 );
+			params.put(FIELD_USER_AUDIT_ID,  PISDJ351 );
 			LOGGER.info("[PISDR352Impl] - cratedIncident() :: Incident with param:: {}", params);
 			OperationDTO operation1 = OperationDTO.Builder.an()
 					.withNameProp(QUERY_INSERT_INSURANCE_INCIDENT)
@@ -130,8 +131,8 @@ public class PISDR352Impl extends PISDR352Abstract {
 			params.put(FIELD_AUTH_ORIGIN_CURNCY_ID, null );
 			params.put(FIELD_DEBIT_ACCOUNT_ID, null );
 			params.put(FIELD_OPERATION_STATUS_ID, "01" );
-			params.put(FIELD_CREATION_USER_ID, "PISDJ351" );
-			params.put(FIELD_USER_AUDIT_ID,  "PISDJ351" );
+			params.put(FIELD_CREATION_USER_ID, PISDJ351 );
+			params.put(FIELD_USER_AUDIT_ID,  PISDJ351 );
 			LOGGER.info("[PISDR352Impl] - cratedIncident() :: Incident with param:: {}", params);
 			OperationDTO operation1 = OperationDTO.Builder.an()
 					.withNameProp(QUERY_INSERT_INSURANCE_INCIDENT)
