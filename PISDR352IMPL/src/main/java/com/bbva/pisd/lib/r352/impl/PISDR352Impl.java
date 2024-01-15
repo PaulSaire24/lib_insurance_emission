@@ -74,6 +74,7 @@ public class PISDR352Impl extends PISDR352Abstract {
 			LOGGER.info("***** PISDR352Impl - executePrePolicyEmissionService ***** Response: {}", getRequestBodyAsJsonFormat(responseBody));
 			LOGGER.info("***** PISDR352Impl - executePrePolicyEmissionService END *****");
 		} catch (HttpStatusCodeException ex){
+			LOGGER.info("***** PISDR352Impl -  ***** executeAddParticipantsService - HttpStatusCodeException: {}", ex.getResponseBodyAsString());
 			String message = ex.getResponseBodyAsString();
 
 			OperationDTO operation =OperationDTO.Builder.an()
@@ -179,9 +180,72 @@ public class PISDR352Impl extends PISDR352Abstract {
 			return output;
 		} catch (HttpStatusCodeException e){
 			LOGGER.info("***** PISDR352Impl -  ***** executeAddParticipantsService - HttpStatusCodeException: {}", e.getResponseBodyAsString());
+			String message = e.getResponseBodyAsString();
+
+			OperationDTO operation =OperationDTO.Builder.an()
+					.withNameProp(QUERY_SELECT_SEQUENCE_INCIDENT)
+					.withTypeOperation(PISDConstant.Operation.SELECT)
+					.withIsForListQuery(false)
+					.withParams(null).build();
+			Map<String, Object> result = (Map<String, Object>)pisdR201.executeQuery(operation);
+			Long resultIndex = Long.valueOf(result.get(FIELD_NEW_INCIDENT_SEQL_NUMBER).toString());
+
+
+			Map<String, Object> params = new HashMap<>();
+			params.put(FIELD_INCIDENT_SEQL_NUMBER, resultIndex);
+			params.put(FIELD_INSURANCE_CONTRACT_ENTITY_ID, "0011" );
+			params.put(FIELD_INSURANCE_CONTRACT_BRANCH_ID, "0130" );
+			params.put(FIELD_INSRC_CONTRACT_INT_ACCOUNT_ID, "4030204777" );
+			params.put(FIELD_OPERATION_DATE, null );
+			params.put(FIELD_INCIDENCE_ERROR_ID, "PISD35100400" );
+			params.put(FIELD_INCIDENCE_ERROR_DESC, StringUtils.left(message, DOSCIENTOS_CINCUENTA_Y_CINCO) );
+			params.put(FIELD_POLICY_RECEIPT_ID, null );
+			params.put(FIELD_AUTH_ORIGIN_CURNCY_ID, null );
+			params.put(FIELD_DEBIT_ACCOUNT_ID, null );
+			params.put(FIELD_OPERATION_STATUS_ID, "01" );
+			params.put(FIELD_CREATION_USER_ID, PISDJ351 );
+			params.put(FIELD_USER_AUDIT_ID,  PISDJ351 );
+			LOGGER.info("[PISDR352Impl] - cratedIncident() :: Incident with param:: {}", params);
+			OperationDTO operation1 = OperationDTO.Builder.an()
+					.withNameProp(QUERY_INSERT_INSURANCE_INCIDENT)
+					.withTypeOperation(PISDConstant.Operation.UPDATE)
+					.withParams(params).build();
+			int resultInsert = (int) pisdR201.executeQuery(operation1);
+
 			return null;
 		} catch (RestClientException ex) {
 			String message = ErrorHelper.getMessageErrorResponseFromRimac(ex);
+
+			OperationDTO operation =OperationDTO.Builder.an()
+					.withNameProp(QUERY_SELECT_SEQUENCE_INCIDENT)
+					.withTypeOperation(PISDConstant.Operation.SELECT)
+					.withIsForListQuery(false)
+					.withParams(null).build();
+			Map<String, Object> result = (Map<String, Object>)pisdR201.executeQuery(operation);
+			Long resultIndex = Long.valueOf(result.get(FIELD_NEW_INCIDENT_SEQL_NUMBER).toString());
+
+
+			Map<String, Object> params = new HashMap<>();
+			params.put(FIELD_INCIDENT_SEQL_NUMBER, resultIndex);
+			params.put(FIELD_INSURANCE_CONTRACT_ENTITY_ID, "0011" );
+			params.put(FIELD_INSURANCE_CONTRACT_BRANCH_ID, "0130" );
+			params.put(FIELD_INSRC_CONTRACT_INT_ACCOUNT_ID, "4030204777" );
+			params.put(FIELD_OPERATION_DATE, null );
+			params.put(FIELD_INCIDENCE_ERROR_ID, "PISD35100400" );
+			params.put(FIELD_INCIDENCE_ERROR_DESC, StringUtils.left(message, DOSCIENTOS_CINCUENTA_Y_CINCO) );
+			params.put(FIELD_POLICY_RECEIPT_ID, null );
+			params.put(FIELD_AUTH_ORIGIN_CURNCY_ID, null );
+			params.put(FIELD_DEBIT_ACCOUNT_ID, null );
+			params.put(FIELD_OPERATION_STATUS_ID, "01" );
+			params.put(FIELD_CREATION_USER_ID, PISDJ351 );
+			params.put(FIELD_USER_AUDIT_ID,  PISDJ351 );
+			LOGGER.info("[PISDR352Impl] - cratedIncident() :: Incident with param:: {}", params);
+			OperationDTO operation1 = OperationDTO.Builder.an()
+					.withNameProp(QUERY_INSERT_INSURANCE_INCIDENT)
+					.withTypeOperation(PISDConstant.Operation.UPDATE)
+					.withParams(params).build();
+			int resultInsert = (int) pisdR201.executeQuery(operation1);
+
 			LOGGER.info("***** PISDR352Impl -  ***** executeAddParticipantsService - RestClientException: {}", message);
 			LOGGER.info("***** PISDR352Impl -  ***** executeAddParticipantsService - RestClientException: {}", ex.getMessage());
 			return null;

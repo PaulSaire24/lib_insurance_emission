@@ -216,7 +216,10 @@ public class PISDR352Test {
 	@Test
 	public void testExecuteAddParticipantsServiceWithHttpServerErrorException() {
 		LOGGER.info("PISDR352 - Executing testExecuteAddParticipantsServiceWithRestClientException...");
+		Map<String, Object> resultIncidentIdSeq =  new HashMap<>();
+		resultIncidentIdSeq.put("NEW_INCIDENT_SEQL_NUMBER", "488885341");
 
+		when(pisdr201.executeQuery(Mockito.anyObject())).thenReturn(resultIncidentIdSeq).thenReturn(1);
 		String responseBody = "{\"error\":{\"code\":\"VIDA001\",\"message\":\"ErroralValidarDatos.\",\"details\":[\"\\\"persona[0].celular\\\"esrequerido\"],\"httpStatus\":400}}";
 		when(rimacUrlForker.generateUriAddParticipants(anyString(),anyString())).thenReturn("any-value");
 		when(rimacUrlForker.generateKeyAddParticipants(anyString())).thenReturn("any-value");
@@ -230,6 +233,10 @@ public class PISDR352Test {
 	@Test
 	public void testExecuteAddParticipantsServiceWithHttpStatusCodeException() {
 		LOGGER.info("PISDR352 - Executing testExecuteAddParticipantsServiceWithRestClientException...");
+		Map<String, Object> resultIncidentIdSeq =  new HashMap<>();
+		resultIncidentIdSeq.put("NEW_INCIDENT_SEQL_NUMBER", "488885341");
+
+		when(pisdr201.executeQuery(Mockito.anyObject())).thenReturn(resultIncidentIdSeq).thenReturn(1);
 		when(externalApiConnector.exchange(anyString(), any(HttpMethod.class), anyObject(), (Class<AgregarTerceroBO>) any(), anyMap()))
 				.thenThrow(new RestClientException("CONNECTION ERROR"));
 		AgregarTerceroBO validation = this.pisdr352.executeAddParticipantsService(new AgregarTerceroBO(),"quotationId","productId","traceId");
