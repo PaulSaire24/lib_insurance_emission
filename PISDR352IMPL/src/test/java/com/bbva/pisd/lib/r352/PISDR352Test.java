@@ -214,28 +214,7 @@ public class PISDR352Test {
 		assertNotNull(validation);
 	}
 
-	@Test
-	public void testExecuteAddParticipantsServiceWithHttpStatusCodeException() {
-		LOGGER.info("PISDR352 - Executing testExecuteAddParticipantsServiceWithRestClientException...");
-		String responseBody = "{\"error\":{\"code\":\"VIDA001\",\"message\":\"ErroralValidarDatos.\",\"details\":[\"\\\"persona[0].celular\\\"esrequerido\"],\"httpStatus\":400}}";
 
-		RestClientException clientException = new HttpClientErrorException(HttpStatus.BAD_REQUEST, "", responseBody.getBytes(), StandardCharsets.UTF_8);
-		when(externalApiConnector.exchange(anyString(), any(HttpMethod.class), anyObject(), (Class<AgregarTerceroBO>) any(), anyMap()))
-				.thenThrow(clientException);
-		AgregarTerceroBO validation = this.pisdr352.executeAddParticipantsService(new AgregarTerceroBO(),"quotationId","productId","traceId");
-		assertNotNull(validation);
-	}
-
-	@Test
-	public void testExecutePrePolicyEmissionServiceWithHttpStatusCodeException() {
-		LOGGER.info("PISDR352 - Executing testExecuteAddParticipantsServiceWithRestClientException...");
-		String responseBody = "{\"error\":{\"code\":\"VIDA001\",\"message\":\"ErroralValidarDatos.\",\"details\":[\"\\\"persona[0].celular\\\"esrequerido\"],\"httpStatus\":400}}";
-		RestClientException clientException = new HttpClientErrorException(HttpStatus.BAD_REQUEST, "", responseBody.getBytes(), StandardCharsets.UTF_8);
-		when(externalApiConnector.postForObject(anyString(), anyObject(), any(), anyMap()))
-				.thenThrow(clientException);
-		EmisionBO rimacResponse = this.pisdr352.executePrePolicyEmissionService(new EmisionBO(), "quotationId", "traceId", "830");
-		assertNotNull(rimacResponse);
-	}
 
 	@Test
 	public void testExecuteAddParticipantsServiceWithRestClientTimeOutException() {

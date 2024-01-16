@@ -55,19 +55,11 @@ public class PISDR352Impl extends PISDR352Abstract {
 			responseBody.setErrorRimacBO(errorRimacBO);
 			LOGGER.info("***** PISDR352Impl - executePrePolicyEmissionService ***** Response: {}", getRequestBodyAsJsonFormat(responseBody));
 			LOGGER.info("***** PISDR352Impl - executePrePolicyEmissionService END *****");
-		} catch (HttpStatusCodeException ex){
-			LOGGER.info("***** PISDR352Impl -  ***** executeAddParticipantsService - HttpStatusCodeException: {}", ex.getResponseBodyAsString());
-			errorRimacBO.setMessage(ex.getResponseBodyAsString());
-			responseBody.setErrorRimacBO(errorRimacBO);
-			return responseBody;
 		} catch (RestClientException ex) {
 			errorRimacBO = ErrorHelper.getMessageErrorResponseFromRimac(ex);
 			responseBody.setErrorRimacBO(errorRimacBO);
-			LOGGER.info("***** PISDR352Impl -  ***** executePrePolicyEmissionService - RestClientException: {}", errorRimacBO.getError().getMensaje());
-			LOGGER.info("***** PISDR352Impl -  ***** executePrePolicyEmissionService - RestClientException: {}", ex.getMessage());
 			return responseBody;
 		} catch (TimeoutException ex) {
-			LOGGER.info("***** PISDR352Impl -  ***** TimeoutException: {}", ex.getMessage());
 			errorRimacBO.setMessage(ex.getMessage());
 			responseBody.setErrorRimacBO(errorRimacBO);
 			return responseBody;
@@ -103,19 +95,11 @@ public class PISDR352Impl extends PISDR352Abstract {
 			LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** Response: {}", output.getPayload().getMensaje());
 			LOGGER.info("***** PISDR352Impl - executeAddParticipantsService END *****");
 			return output;
-		} catch (HttpStatusCodeException ex){
-			LOGGER.info("***** PISDR352Impl -  ***** executeAddParticipantsService - HttpStatusCodeException: {}", ex.getResponseBodyAsString());
-			errorRimacBO.setMessage(ex.getResponseBodyAsString());
-			output.setErrorRimacBO(errorRimacBO);
-			return output;
 		} catch (RestClientException ex) {
 			errorRimacBO = ErrorHelper.getMessageErrorResponseFromRimac(ex);
 			output.setErrorRimacBO(errorRimacBO);
-			LOGGER.info("***** PISDR352Impl -  ***** executeAddParticipantsService - RestClientException: {}", errorRimacBO.getError().getMensaje());
-			LOGGER.info("***** PISDR352Impl -  ***** executeAddParticipantsService - RestClientException: {}", ex.getMessage());
 			return output;
 		} catch (TimeoutException ex) {
-			LOGGER.info("***** PISDR352Impl -  ***** TimeoutException: {}", ex.getMessage());
 			errorRimacBO.setMessage(ex.getMessage());
 			output.setErrorRimacBO(errorRimacBO);
 			return output;
