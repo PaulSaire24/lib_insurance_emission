@@ -4,7 +4,6 @@
 	<bean id="pisdR352" class="com.bbva.pisd.lib.r352.impl.PISDR352Impl" parent="pisdR352Abstract">
 		<property name="pisdR014" ref="pisdR014"/>
 		<property name="rimacUrlForker" ref="rimacUrlForker"/>
-		<property name="pisdR201" ref="pisdR201"/>
 	</bean>
 	<bean id="rimacUrlForker" class="com.bbva.pisd.lib.r352.impl.util.RimacUrlForker">
 		<property name="applicationConfigurationService" ref="applicationConfigurationService"/>
