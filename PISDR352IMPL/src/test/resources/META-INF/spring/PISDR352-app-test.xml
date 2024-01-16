@@ -4,7 +4,4 @@
 	<bean id="pisdR014" class="org.mockito.Mockito" factory-method="mock">
 		<constructor-arg value="com.bbva.pisd.lib.r014.PISDR014"/>
 	</bean>
-	<bean id="pisdR201" class="org.mockito.Mockito" factory-method="mock">
-		<constructor-arg value="com.bbva.pisd.lib.r201.PISDR201"/>
-	</bean>
 </beans>

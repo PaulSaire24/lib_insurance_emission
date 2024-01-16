@@ -1,14 +1,13 @@
 package com.bbva.pisd.lib.r352.impl.util;
 
-import com.bbva.rbvd.dto.renovation.external.ErrorRimacBO;
+import com.bbva.rbvd.dto.insrncsale.bo.ErrorRimacBO;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 
 import java.nio.charset.StandardCharsets;
-
-import static org.junit.Assert.*;
 
 public class ErrorHelperTest {
 
@@ -16,14 +15,14 @@ public class ErrorHelperTest {
     public void getMessageErrorResponseFromRimac() {
         String responseBody = "{\"error\":{\"code\":\"VIDA001\",\"message\":\"Error al Validar Datos\",\"details\":[\"La cotizacion esta en proceso.\"],\"httpStatus\":403}}";
         HttpClientErrorException clientException = new HttpClientErrorException(HttpStatus.FORBIDDEN, "", responseBody.getBytes(), StandardCharsets.UTF_8);
-        String result = ErrorHelper.getMessageErrorResponseFromRimac(clientException);
+        ErrorRimacBO result = ErrorHelper.getMessageErrorResponseFromRimac(clientException);
         Assert.assertNotNull(result);
     }
 
     @Test
     public void getMessageErrorResponseFromRimacNull() {
-        HttpClientErrorException clientException = new HttpClientErrorException(HttpStatus.FORBIDDEN, "", null, StandardCharsets.UTF_8);
-        String result = ErrorHelper.getMessageErrorResponseFromRimac(clientException);
+        HttpServerErrorException clientException = new HttpServerErrorException(HttpStatus.FORBIDDEN, "", null, StandardCharsets.UTF_8);
+        ErrorRimacBO result = ErrorHelper.getMessageErrorResponseFromRimac(clientException);
         Assert.assertNotNull(result);
     }
 

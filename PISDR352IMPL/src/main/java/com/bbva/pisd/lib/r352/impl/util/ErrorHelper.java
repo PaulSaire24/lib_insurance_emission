@@ -1,9 +1,13 @@
 package com.bbva.pisd.lib.r352.impl.util;
 
+import com.bbva.rbvd.dto.insrncsale.bo.ErrorRimacBO;
+import com.bbva.rbvd.dto.renovation.constants.RBVDConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestClientException;
+
+import java.util.Objects;
 
 public class ErrorHelper {
 
@@ -13,22 +17,27 @@ public class ErrorHelper {
         throw new IllegalStateException("Utility class");
     }
 
-    public static String getMessageErrorResponseFromRimac(RestClientException exception) {
+    public static ErrorRimacBO getMessageErrorResponseFromRimac(RestClientException exception) {
         LOGGER.info("getMessageErrorResponseFromRimac :: Start - {}", exception.getMessage());
-
+        ErrorRimacBO rimacError = new ErrorRimacBO();
         if(exception instanceof HttpClientErrorException) {
             HttpClientErrorException httpClientErrorException = (HttpClientErrorException) exception;
-
             String responseBody = httpClientErrorException.getResponseBodyAsString();
             LOGGER.info("HttpClientErrorException - Response body: {}", responseBody);
-
-            return responseBody;
+            rimacError = getErrorObject(responseBody);
+            return rimacError;
+        } else if(Objects.nonNull(exception.getMostSpecificCause())){
+            String mostSpecificCause = exception.getMostSpecificCause().getMessage();
+            if(Objects.isNull(mostSpecificCause)){
+                rimacError.setMessage(RBVDConstant.MessageResponse.NO_ERROR_RESPONSE);
+                return rimacError;
+            }
+            rimacError.setMessage(mostSpecificCause);
         }
-
-        LOGGER.info("RimacExceptionHandler not instanceof HttpServerErrorException");
-
-        LOGGER.info("getMessageErrorResponseFromRimac :: End - {}", exception.getMostSpecificCause().getMessage());
-        return exception.getMostSpecificCause().getMessage();
+        return rimacError;
     }
 
+    private static ErrorRimacBO getErrorObject(String responseBody) {
+        return JsonHelper.getInstance().fromString(responseBody, ErrorRimacBO.class);
+    }
 }
