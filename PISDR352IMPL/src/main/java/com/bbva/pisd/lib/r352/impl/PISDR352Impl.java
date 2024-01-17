@@ -51,7 +51,7 @@ public class PISDR352Impl extends PISDR352Abstract {
 		try {
 			responseBody = this.externalApiConnector.postForObject(this.rimacUrlForker.generatePropertyKeyName(productId), entity,
 					EmisionBO.class, uriParam);
-			responseBody.setErrorRimacBO(errorRimacBO);
+			responseBody.setErrorRimacBO(null);
 			LOGGER.info("***** PISDR352Impl - executePrePolicyEmissionService ***** Response: {}", getRequestBodyAsJsonFormat(responseBody));
 			LOGGER.info("***** PISDR352Impl - executePrePolicyEmissionService END *****");
 		} catch (RestClientException ex) {
@@ -91,7 +91,7 @@ public class PISDR352Impl extends PISDR352Abstract {
 			ResponseEntity<AgregarTerceroBO> response = this.externalApiConnector.exchange(this.rimacUrlForker.generateKeyAddParticipants(productId),HttpMethod.PATCH, entity,
 					AgregarTerceroBO.class, singletonMap("cotizacion",quotationId));
 			output = response.getBody();
-			output.setErrorRimacBO(errorRimacBO);
+			output.setErrorRimacBO(null);
 			LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** Response: {}", output.getPayload().getMensaje());
 			LOGGER.info("***** PISDR352Impl - executeAddParticipantsService END *****");
 			return output;
