@@ -14,7 +14,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.MediaType;
-import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestClientException;
 
 import java.nio.charset.StandardCharsets;
@@ -92,6 +91,7 @@ public class PISDR352Impl extends PISDR352Abstract {
 			ResponseEntity<AgregarTerceroBO> response = this.externalApiConnector.exchange(this.rimacUrlForker.generateKeyAddParticipants(productId),HttpMethod.PATCH, entity,
 					AgregarTerceroBO.class, singletonMap("cotizacion",quotationId));
 			output = response.getBody();
+			output.setErrorRimacBO(errorRimacBO);
 			LOGGER.info("***** PISDR352Impl - executeAddParticipantsService ***** Response: {}", output.getPayload().getMensaje());
 			LOGGER.info("***** PISDR352Impl - executeAddParticipantsService END *****");
 			return output;
