@@ -1,7 +1,6 @@
 package com.bbva.pisd.lib.r352.impl.util;
 
 import com.bbva.rbvd.dto.insrncsale.bo.ErrorRimacBO;
-import com.bbva.rbvd.dto.renovation.constants.RBVDConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.client.HttpClientErrorException;
@@ -12,6 +11,7 @@ import java.util.Objects;
 public class ErrorHelper {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ErrorHelper.class);
+    private static final String NO_ERROR_RESPONSE = "¡ NO SE PUDO CAPTURAR EL ERROR !";
 
     private ErrorHelper() {
         throw new IllegalStateException("Utility class");
@@ -29,7 +29,7 @@ public class ErrorHelper {
         } else if(Objects.nonNull(exception.getMostSpecificCause())){
             String mostSpecificCause = exception.getMostSpecificCause().getMessage();
             if(Objects.isNull(mostSpecificCause)){
-                rimacError.setMessage(RBVDConstant.MessageResponse.NO_ERROR_RESPONSE);
+                rimacError.setMessage(NO_ERROR_RESPONSE);
                 return rimacError;
             }
             rimacError.setMessage(mostSpecificCause);
